@@ -37,3 +37,4 @@ coding!
 - Teammate name #1: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - Lisa Rexroad (Primary Scrum Master): [GitHub](https://github.com/lrexroad) / [LinkedIn](https://www.linkedin.com/in/lisa-rexroad-csm-sa-ccmp-b556511b/)
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Jun Kyung Lee (Developer): [GitHub](https://github.com/junlee0325) / [LinkedIn](https://www.linkedin.com/in/iam-junkyunglee/)
