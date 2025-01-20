@@ -3,6 +3,7 @@ import { createContext } from "react";
 import RootLayout from "./pages/Root.jsx";
 import Home from "./pages/Home.jsx";
 import Allergies from "./pages/Allergies.jsx";
+import { dishesLoader } from "./pages/Allergies.jsx";
 
 export const AppContext = createContext([]);
 
@@ -19,6 +20,7 @@ function App() {
         },
         {
           path: "Allergies",
+          loader: dishesLoader,
           element: <Allergies />,
         },
       ],

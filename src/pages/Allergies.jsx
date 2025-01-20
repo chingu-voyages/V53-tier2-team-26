@@ -1,16 +1,23 @@
 import { useState } from "react";
 import "./Allergies.css";
 import Select from "react-select";
+import { useLoaderData } from "react-router-dom";
+
 const ALLERGENS = [
-  { value: "Gluten", label: "Gluten" },
-  { value: "Fish", label: "Fish" },
+  {
+    value: "Wheat, Pasta, Flour, Bread, Cake",
+    label: "Gluten",
+  },
+  { value: "Tuna, Salmon", label: "Fish" },
   { value: "Mushrooms", label: "Mushrooms" },
-  { value: "Dairy", label: "Dairy" },
-  { value: "Shellfish", label: "Shellfish" },
+  { value: "Milk, Cream, Cheese, Butter, Yogurt", label: "Dairy" },
+  { value: "Eggs", label: "Eggs" },
+  { value: "Crab, Lobster, Shrimp", label: "Shellfish" },
   { value: "Vanilla", label: "Vanilla" },
   { value: "Corn", label: "Corn" },
   { value: "Honey", label: "Honey" },
   { value: "Garlic", label: "Garlic" },
+  { value: "Soy", label: "Soy" },
 ];
 
 const EMPLOYEES_DEFAULT_INFO = [
@@ -26,6 +33,9 @@ const EMPLOYEES_DEFAULT_INFO = [
 ];
 
 export default function Allergies() {
+  //dishes from dishes API
+  const dishes = useLoaderData();
+  console.log(dishes);
   const [employees, setEmployees] = useState(
     localStorage.getItem("employeesInformation") !== null
       ? JSON.parse(localStorage.getItem("employeesInformation"))
@@ -52,15 +62,33 @@ export default function Allergies() {
       (employee) => employee.allergies.length > 0
     );
     //here take allergens and return ingredients that cause allergies
-    const listOfAllAllergiesAmoungEmployess = employeesWithAllergies.map(
-      (employee) => employee.allergies.map((allergy) => allergy.label)
+    const listOfAllergiesAmongEmployees = employeesWithAllergies.map(
+      (employee) =>
+        employee.allergies.flatMap((allergy) => {
+          if (
+            allergy.label === "Fish" ||
+            allergy.label === "Gluten" ||
+            allergy.label === "Dairy" ||
+            allergy.label === "Shellfish"
+          ) {
+            return allergy.value.split(" ");
+          }
+          return allergy.value;
+        })
     );
 
     const listOfUniqueAllergies = [
-      ...new Set(listOfAllAllergiesAmoungEmployess.flat()),
+      ...new Set(listOfAllergiesAmongEmployees.flat()),
     ];
     console.log(listOfUniqueAllergies);
     //get dishes from api and
+    const dishesWithoutEmployeesAllergents = dishes.filter((dish) => {
+      dish.ingredients.forEach((ingredient) => {
+        return listOfUniqueAllergies.includes(ingredient);
+      });
+    });
+
+    console.log(dishesWithoutEmployeesAllergents);
     //filter dishes that contain any of the allergens listed
   }
 
@@ -90,4 +118,18 @@ export default function Allergies() {
       </section>
     </>
   );
+}
+
+//Dishes API loader
+export async function dishesLoader() {
+  try {
+    const ApiResponse = await fetch("https://menus-api.vercel.app/dishes");
+    if (!ApiResponse.ok) {
+      throw new Error(`Response status: ${ApiResponse.status}`);
+    }
+    const dishesData = await ApiResponse.json();
+    return dishesData;
+  } catch (error) {
+    console.error(error.message);
+  }
 }
