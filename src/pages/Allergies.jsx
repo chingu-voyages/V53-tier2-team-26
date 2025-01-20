@@ -8,11 +8,11 @@ const ALLERGENS = [
     value: "Wheat, Pasta, Flour, Bread, Cake",
     label: "Gluten",
   },
-  { value: "Tuna, Salmon", label: "Fish" },
+  { value: "Tuna Salmon", label: "Fish" },
   { value: "Mushrooms", label: "Mushrooms" },
-  { value: "Milk, Cream, Cheese, Butter, Yogurt", label: "Dairy" },
+  { value: "Milk Cream Cheese Butter Yogurt", label: "Dairy" },
   { value: "Eggs", label: "Eggs" },
-  { value: "Crab, Lobster, Shrimp", label: "Shellfish" },
+  { value: "Crab Lobster Shrimp", label: "Shellfish" },
   { value: "Vanilla", label: "Vanilla" },
   { value: "Corn", label: "Corn" },
   { value: "Honey", label: "Honey" },
@@ -35,7 +35,6 @@ const EMPLOYEES_DEFAULT_INFO = [
 export default function Allergies() {
   //dishes from dishes API
   const dishes = useLoaderData();
-  console.log(dishes);
   const [employees, setEmployees] = useState(
     localStorage.getItem("employeesInformation") !== null
       ? JSON.parse(localStorage.getItem("employeesInformation"))
@@ -71,7 +70,7 @@ export default function Allergies() {
             allergy.label === "Dairy" ||
             allergy.label === "Shellfish"
           ) {
-            return allergy.value.split(" ");
+            return allergy.value.split(" ").concat(allergy.label);
           }
           return allergy.value;
         })
@@ -80,17 +79,23 @@ export default function Allergies() {
     const listOfUniqueAllergies = [
       ...new Set(listOfAllergiesAmongEmployees.flat()),
     ];
-    console.log(listOfUniqueAllergies);
-    //get dishes from api and
-    const dishesWithoutEmployeesAllergents = dishes.filter((dish) => {
-      dish.ingredients.forEach((ingredient) => {
-        return listOfUniqueAllergies.includes(ingredient);
-      });
-    });
 
-    console.log(dishesWithoutEmployeesAllergents);
-    //filter dishes that contain any of the allergens listed
+    console.log(listOfUniqueAllergies);
+
+    //dishes without employees allergens
+    const dishesWithoutEmployeesAllergens = dishes.filter((dish) => {
+      if (
+        listOfUniqueAllergies.includes(dish.name.split(" ").map((name) => name))
+      ) {
+        return false;
+      }
+
+      return !dish.ingredients.includes(...listOfUniqueAllergies);
+    });
+    console.log(dishesWithoutEmployeesAllergens);
   }
+
+  ///save this to local storage
 
   return (
     <>
