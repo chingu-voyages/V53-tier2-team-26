@@ -5,19 +5,22 @@ import { useLoaderData } from "react-router-dom";
 
 const ALLERGENS = [
   {
-    value: "Wheat, Pasta, Flour, Bread, Cake",
+    value: "Wheat Pasta Flour Bread Cake",
     label: "Gluten",
   },
-  { value: "Tuna Salmon", label: "Fish" },
-  { value: "Mushrooms", label: "Mushrooms" },
   { value: "Milk Cream Cheese Butter Yogurt", label: "Dairy" },
-  { value: "Eggs", label: "Eggs" },
-  { value: "Crab Lobster Shrimp", label: "Shellfish" },
-  { value: "Vanilla", label: "Vanilla" },
-  { value: "Corn", label: "Corn" },
-  { value: "Honey", label: "Honey" },
-  { value: "Garlic", label: "Garlic" },
+  { value: "Eggs Egg", label: "Eggs" },
   { value: "Soy", label: "Soy" },
+  { value: "Crab Lobster Shrimp", label: "Shellfish" },
+  { value: "Tuna Salmon", label: "Fish" },
+  { value: "Nuts", label: "Nuts" },
+  { value: "Peanuts", label: "Peanuts" },
+  { value: "Lemon Orange Lime", label: "Citrus" },
+  { value: "Tomatoes Tomato", label: "Tomatoes" },
+  { value: "Garlic", label: "Garlic" },
+  { value: "Onions Onion", label: "Onions" },
+  { value: "Corn", label: "Corn" },
+  { value: "Avocado", label: "Avocado" },
 ];
 
 const EMPLOYEES_DEFAULT_INFO = [
