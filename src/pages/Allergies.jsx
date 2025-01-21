@@ -86,19 +86,16 @@ export default function Allergies() {
     console.log(listOfUniqueAllergies);
 
     //dishes without employees allergens
+    //needs some work
     const dishesWithoutEmployeesAllergens = dishes.filter((dish) => {
-      if (
-        listOfUniqueAllergies.includes(dish.name.split(" ").map((name) => name))
-      ) {
-        return false;
-      }
-
-      return !dish.ingredients.includes(...listOfUniqueAllergies);
+      const results = dish.ingredients.every(
+        (ingredient) => !listOfUniqueAllergies.includes(ingredient)
+      );
+      return results;
     });
     console.log(dishesWithoutEmployeesAllergens);
   }
-
-  ///save this to local storage
+  ///save this to local storage?
 
   return (
     <>
