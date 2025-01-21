@@ -63,7 +63,7 @@ export default function Allergies() {
     const employeesWithAllergies = updatedEmployeesData.filter(
       (employee) => employee.allergies.length > 0
     );
-    //here take allergens and return ingredients that cause allergies
+    //take allergens and return ingredients that cause allergies
     const listOfAllergiesAmongEmployees = employeesWithAllergies.map(
       (employee) =>
         employee.allergies.flatMap((allergy) => {
@@ -82,20 +82,31 @@ export default function Allergies() {
     const listOfUniqueAllergies = [
       ...new Set(listOfAllergiesAmongEmployees.flat()),
     ];
-
+    //take allergens and return ingredients that cause allergies
     console.log(listOfUniqueAllergies);
 
     //dishes without employees allergens
-    //needs some work
     const dishesWithoutEmployeesAllergens = dishes.filter((dish) => {
+      //exclude dishes with allergen on name
+      console.log(dish.name);
+      const match = dish.name
+        .split(" ")
+        .some((name) => listOfUniqueAllergies.includes(name));
+      console.log(match);
+      // if (listOfUniqueAllergies.includes(dish.name.split(" ")[0])) {
+      if (match) {
+        return false;
+      }
+      //exclude dishes with allergen on name
       const results = dish.ingredients.every(
         (ingredient) => !listOfUniqueAllergies.includes(ingredient)
       );
       return results;
     });
     console.log(dishesWithoutEmployeesAllergens);
+    //dishes without employees allergens
+    ///save this to local storage
   }
-  ///save this to local storage?
 
   return (
     <>
