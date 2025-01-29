@@ -29,6 +29,5 @@ export default function useGenerateWeeklyDishes() {
         }
     }
 
-    console.log(menuDishes);
     return [menuDishes, setMenuDishes];
 }

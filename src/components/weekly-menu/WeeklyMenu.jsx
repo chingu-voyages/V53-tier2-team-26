@@ -16,7 +16,7 @@ function getWeekLabels(weekStart) {
     return days;
 }
 
-export function WeeklyMenu({ weekStartDay, dishes }) {
+export function WeeklyMenu({ weekStartDay, dishes, offDays }) {
     const [currentWeekDaysLabels, setCurrentWeekDaysLabels] = useState([]);
     const [currentWeekDays, setCurrentWeekDays] = useState([]);
 
@@ -36,7 +36,7 @@ export function WeeklyMenu({ weekStartDay, dishes }) {
                 <button onClick={() => console.log(currentWeekDays)}>test</button>
                 <div className="grid grid-cols-4 gap-6">
                     {Array.from(dishes || []).map((dish, i) => (
-                        <DayCard key={i} dish={dish} day={currentWeekDaysLabels[i]} />
+                        <DayCard key={i} dish={offDays[i] ? "OFF" : dish.name} day={currentWeekDaysLabels[i]} />
                     ))}
                 </div>
             </div>

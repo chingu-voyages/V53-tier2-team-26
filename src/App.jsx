@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 import RootLayout from "./pages/Root.jsx";
 import Home from "./pages/Home.jsx";
@@ -10,6 +10,8 @@ import GenerateMenu from "./pages/GenerateMenu.jsx";
 export const AppContext = createContext([]);
 
 function App() {
+    // TODO: move offDays to local storage
+    const [offDays, setOffDays] = useState([false, false, false, false, false, true, true]);
     const router = createBrowserRouter([
         {
             path: "/",
@@ -19,7 +21,7 @@ function App() {
                 {
                     path: "",
                     loader: dataDishesLoader,
-                    element: <Home />,
+                    element: <Home offDays={offDays} />,
                 },
                 {
                     path: "Allergies",
@@ -28,7 +30,7 @@ function App() {
                 },
                 {
                     path: "GenerateMenu",
-                    element: <GenerateMenu />,
+                    element: <GenerateMenu offDays={offDays} setOffDays={setOffDays} />,
                 },
             ],
         },

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import moment from "moment";
 import useGenerateWeeklyDishes from "../hooks/useGenerateWeeklyDishes";
 
-export default function Home() {
+export default function Home({ offDays }) {
     const [menuDishes, setMenuDishes] = useGenerateWeeklyDishes();
 
     useEffect(() => {
@@ -32,10 +32,18 @@ export default function Home() {
 
             <div className="flex flex-col gap-10">
                 {/* Current Week menu */}
-                <WeeklyMenu weekStartDay={moment().startOf("isoWeek")} dishes={menuDishes.currentWeek} />
+                <WeeklyMenu
+                    weekStartDay={moment().startOf("isoWeek")}
+                    dishes={menuDishes.currentWeek}
+                    offDays={offDays}
+                />
 
                 {/* Upcoming Week menu */}
-                <WeeklyMenu weekStartDay={moment().add(7, "days").startOf("isoWeek")} dishes={menuDishes.nextWeek} />
+                <WeeklyMenu
+                    weekStartDay={moment().add(7, "days").startOf("isoWeek")}
+                    dishes={menuDishes.nextWeek}
+                    offDays={offDays}
+                />
             </div>
         </div>
     );
