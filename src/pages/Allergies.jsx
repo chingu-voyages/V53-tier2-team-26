@@ -11,6 +11,8 @@ import { useState } from "react";
 import { customStyles } from "../data/customStyles";
 import DeleteAllModal from "../components/DeleteAllModal";
 import DeleteItemModal from "../components/DeleteItemModal";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { NavLink } from "react-router-dom";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -107,7 +109,16 @@ export default function Allergies() {
 
   return (
     <section className="flex flex-col items-center w-full">
-      <h2 className="text-center m-4 text-2xl font-normal">Allergies</h2>{" "}
+      <div className="grid grid-col grid-cols-3 py-5 items-center justify-between w-full">
+        <NavLink
+          className="w-fit hover:text-button-blue flex flex-row items-center justify-start"
+          to={"/"}
+        >
+          <ArrowBackIcon fontSize="medium" className="" />
+          <span className="">Return to Home</span>
+        </NavLink>
+        <h2 className="text-center text-2xl ">Allergies</h2>
+      </div>
       <section className="flex flex-col w-full items-center">
         <ul className="flex flex-col w-4/5 items-center gap-4 text-lg">
           <li className="flex w-full items-center  gap-4">
@@ -168,7 +179,7 @@ export default function Allergies() {
                     employee.allergies.length > 0 && (
                       <>
                         <button
-                          className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2 "
+                          className="bg-custom-blue flex justify-center text-black hover:text-button-blue flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2 "
                           onClick={(event) => {
                             setActiveEditingEmployeeName(employee.name);
                           }}
@@ -180,7 +191,7 @@ export default function Allergies() {
                   {employee.allergies.length > 0 &&
                   employee.name === activeEditingEmployeeName ? (
                     <button
-                      className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2"
+                      className="bg-custom-blue flex justify-center text-black hover:text-button-blue flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2 "
                       onClick={(event) => {
                         setActiveEditingEmployeeName(null);
                       }}
@@ -192,7 +203,7 @@ export default function Allergies() {
                   )}
                 </span>
                 <button
-                  className="w-1/12 flex flex-row justify-center items-center "
+                  className="w-1/12 flex flex-row justify-center items-center text-black hover:text-[red]"
                   onClick={(event) => {
                     setDeletingEmployee(employee.name);
                     if (employee.allergies.length > 0) {

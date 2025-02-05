@@ -6,19 +6,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-export default function DeleteAllModal({
-  showDeleteAllModal,
-  handleClosingDeleteAllDialog,
-}) {
-  const handleClose = (Agree) => {
-    handleClosingDeleteAllDialog(Agree);
-  };
+export default function ModalB({onClose}) {
 
   return (
     <>
       <Dialog
-        sx={{ color: "white" }}
-        open={showDeleteAllModal}
+        sx={{ color: "red" }}
+        open="true"
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -27,19 +21,17 @@ export default function DeleteAllModal({
             id="alert-dialog-description"
             sx={{ color: "white", fontWeight: "bold" }}
           >
-            Are you sure you want to delete all the allergies from this employee
+            Menu already exists for this week
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ backgroundColor: "red" }}>
-          <Button sx={{ color: "white" }} onClick={() => handleClose(false)}>
-            Disagree
-          </Button>
+
           <Button
             sx={{ color: "white" }}
-            onClick={() => handleClose(true)}
+            onClick={onClose}
             autoFocus
           >
-            Agree
+            Close
           </Button>
         </DialogActions>
       </Dialog>
