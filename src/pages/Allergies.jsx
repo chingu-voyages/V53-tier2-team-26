@@ -8,7 +8,7 @@ import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import Select, { components } from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { customStyles } from "../data/customStyles";
 import DeleteAllModal from "../components/DeleteAllModal";
 import DeleteItemModal from "../components/DeleteItemModal";
@@ -17,6 +17,8 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { NavLink } from "react-router-dom";
 import generateAllergiesPDF from "../functions/generateAllergiesPDF";
 import { ToastContainer } from "react-toastify";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {app} from "../data/firebase"
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -36,6 +38,20 @@ export default function Allergies() {
   const [showDeleteItemModal, setShowDeleteItemModal] = useState(false);
   const [optionsSelected, setOptionsSelected] = useState(null);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [signedIn, setSignedIn] = useState(false)
+
+  useEffect(() => {
+
+    const auth = getAuth(app);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setSignedIn(true);
+      } else {
+        setSignedIn(false);
+      }
+    });  
+  }, []);
 
   function handleClosingDeleteAllDialog(agree) {
     setShowDeleteAllModal(false);
@@ -126,7 +142,7 @@ export default function Allergies() {
         </NavLink>
 
         <h2 className="text-center text-lg md:text-2xl ">Allergies</h2>
-        <div className="justify-self-end">
+        {signedIn && <div className="justify-self-end">
           <button
             onClick={generateAllergiesPDF}
             type="button"
@@ -142,7 +158,7 @@ export default function Allergies() {
           >
             <FileUploadIcon fontSize="medium" className="cursor-pointer" />
           </button>
-        </div>
+        </div>}
       </div>
       <section className="flex flex-col w-full items-center bg-custom-blue py-4 md:py-6">
         <ul className="flex flex-col w-[95%] md:w-4/5 items-center gap-2 md:gap-4 text-sm md:text-lg">

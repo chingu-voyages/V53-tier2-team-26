@@ -6,6 +6,7 @@ import Home from "./pages/Home.jsx";
 import Allergies from "./pages/Allergies.jsx";
 import dataDishesLoader from "./data/dishes.js";
 import GenerateMenu from "./pages/GenerateMenu.jsx";
+import Login from "./pages/Login.jsx";
 
 export const AppContext = createContext([]);
 
@@ -31,13 +32,19 @@ function App() {
                     loader: dataDishesLoader,
                     element: <GenerateMenu />,
                 },
+                {
+                    path: "Login",
+                    element: <Login />,
+                }
             ],
         },
     ]);
 
     return (
         <AppContext.Provider value={{}}>
-            <RouterProvider router={router} />
+           
+                <RouterProvider router={router} />
+        
         </AppContext.Provider>
     );
 }

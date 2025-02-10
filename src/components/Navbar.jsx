@@ -1,10 +1,39 @@
-import { NavLink } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+    const navigate = useNavigate();
+  useEffect(() => {
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setSignedIn(true);
+    } else {
+        setSignedIn(false);
+      }
+    });
+    console.log('signed in: ', signedIn)
+  }, [signedIn]);
+
+  function handleUserAuthentication(){
+    if (signedIn) {
+        const auth= getAuth();
+        signOut(auth).then(()=>{
+            setSignedIn(false);
+        })
+    } else {
+        navigate('/Login')
+    }
+  }
+
 
   return (
     <div className="relative py-5 w-screen md:w-[95%] lg:w-[80%] grid grid-cols-3 justify-center items-center">
@@ -76,6 +105,9 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
+    
+      <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mx-10" onClick={()=>handleUserAuthentication()}>{!signedIn ? 'Manager Login' : 'Sign Out'}</button>
+
     </div>
   );
 }

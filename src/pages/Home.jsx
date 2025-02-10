@@ -2,12 +2,13 @@ import { WeeklyMenu } from "../components/weekly-menu/WeeklyMenu";
 import { NavLink, useLoaderData } from "react-router-dom";
 import { addDays, startOfWeek } from "date-fns";
 import { ToastContainer } from "react-toastify";
+
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import AddIcon from "@mui/icons-material/Add";
 import generatePDF from "../functions/generatePDF";
 
 export default function Home() {
-    //
+    
     const fetchDishes = useLoaderData();
     return (
         <div className="flex flex-col items-center w-[95%] md:w-[95%] lg:w-[80%] ">
