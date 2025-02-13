@@ -34,7 +34,7 @@ export default function GenerateMenu() {
   }, [arrayOfTrues]);
 
   return (
-    <div className=" flex flex-col items-center  w-[95%] md:w-[95%] lg:w-[70%]  h-full py-2">
+    <div className=" flex flex-col items-center  w-[95%] md:w-[95%] lg:w-[70%]  h-full md:h-screen py-2">
       <div className="grid grid-col grid-cols-3 py-2 items-center justify-between w-full">
         <NavLink
           className="w-fit text-white hover:text-button-yellow flex flex-row items-center justify-start"

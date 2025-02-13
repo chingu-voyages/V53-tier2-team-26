@@ -15,7 +15,7 @@ export default function ResetPassword() {
                             </h3>
                             <button
                                 onClick={() => navigate("/")}
-                                className="my-12 flex w-full justify-center rounded-md bg-[#364688] hover:bg-indigo-900 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-[#364688] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                                className="my-12 flex w-full justify-center rounded-md bg-orange-500 hover:bg-orange-700 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                                 Home
                             </button>
                         </div>
@@ -52,7 +52,7 @@ export default function ResetPassword() {
                                     <div>
                                         <button
                                             type="submit"
-                                            className="flex w-full justify-center rounded-md bg-[#364688] hover:bg-indigo-900 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                                            className="flex w-full justify-center rounded-md bg-orange-500 hover:bg-orange-700 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                                             Send Password Reset Link
                                         </button>
                                     </div>
