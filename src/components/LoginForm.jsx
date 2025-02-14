@@ -5,7 +5,7 @@ export default function Login() {
         useAuthenticateUser();
 
     return (
-        <div className="flex flex-col justify-center items-center s:w-full w-full my-auto">
+        <section className="flex flex-col justify-center items-center s:w-full w-full my-auto">
             <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-custom-yellow rounded">
                 {!signedIn ? (
                     <div className="max-w-sm mx-auto min-h-full">
@@ -16,7 +16,12 @@ export default function Login() {
                             </h2>
                         </div>
                         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                            <form className="space-y-6" action="#" method="POST" onSubmit={(e) => handleSignIn(e)}>
+                            <form
+                                id="login-form"
+                                className="space-y-6"
+                                action="#"
+                                method="POST"
+                                onSubmit={(e) => handleSignIn(e)}>
                                 <div>
                                     <label htmlFor="email" className="block text-sm/6 font-medium   ">
                                         Email address
@@ -79,6 +84,6 @@ export default function Login() {
                     <div>You are already signed in.</div>
                 )}
             </div>
-        </div>
+        </section>
     );
 }
