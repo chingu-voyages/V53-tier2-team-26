@@ -48,7 +48,6 @@ export function WeeklyMenu({ weekStartDay }) {
   // runs only if local storage is NOT empty
   useEffect(() => {
     if (initialReady && storedWeeklyMenu !== null) {
-      console.log(initialReady);
       const updatedStoredWeeklyMenu = storedWeeklyMenu.filter((x) =>
         currentWeekDays.includes(x.id)
       );
@@ -67,7 +66,6 @@ export function WeeklyMenu({ weekStartDay }) {
     }
   }, [initialReady]);
 
-
   return (
     <div className="flex flex-col items-around mt-1 mb-5 py-4 px-2 w-full bg-custom-yellow">
       <h2 className="text-center text-md md:text-2xl pb-5 underline">
@@ -81,8 +79,8 @@ export function WeeklyMenu({ weekStartDay }) {
           : `${formatISO9075(weekStartDay, {
               representation: "date",
             })} ~ ${formatISO9075(addDays(weekStartDay, 6), {
-                representation: "date",
-              })}`}
+              representation: "date",
+            })}`}
       </h2>
 
       <div className="flex flex-col md:grid md:grid-cols-4 w-full gap-3">

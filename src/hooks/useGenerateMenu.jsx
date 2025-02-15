@@ -57,8 +57,6 @@ export default function useGenerateMenu() {
         setMenuDishes();
 
         setModalType("A");
-
-        console.log(combinedArray);
       }
     } else {
       // (Generate) if local storage does not exist
@@ -70,12 +68,10 @@ export default function useGenerateMenu() {
       }));
 
       setGeneratedWeeklyMenuAdd(combinedArray);
-    
+
       setMenuDishes();
 
       setModalType("A");
-
-      console.log(combinedArray);
     }
   };
 
@@ -106,8 +102,6 @@ export default function useGenerateMenu() {
       setMenuDishes();
 
       setModalType("D");
-
-      console.log(combinedArray);
     } else {
       // (Regenerate) if selected week DO NOT have a generated menu
       setModalType("E");
